@@ -8,7 +8,7 @@ comment =\
 
 postedOn = []
 r = praw.Reddit(user_agent='DM_Bot')
-r.login('DailMail_Bot', 'password')
+r.login('DailMail_Bot', '*******')
 reddits = {} # Avoid these reddits
 
 print "Logged in"
@@ -24,17 +24,19 @@ while True:
 	  postedOn.append(submission.id)
 
 	if submission.id not in postedOn:
-	  print "We got one! " + submission.short_link
+          #print "We got one! " + submission.short_link
 	  subdomain = re.sub(r'^[^\.]*\.', "", submission.url);
 	  link = re.sub(r'\.(gif|webm)$', "", subdomain);
 
 	  try:
 	    submission.add_comment(comment % (link))
-	    print "Posted!"
+            #print "Posted!"
 	    postedOn.append(submission.id)
 	  except:
-	    print "Failed to submit."
+	    pass
+            #print "Failed to submit."
 
     first = False
   except:
-    print "Could not connect to reddit!"
+    pass
+    #print "Could not connect to reddit!"
